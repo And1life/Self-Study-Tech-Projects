@@ -1,1 +1,1 @@
-# Self-Study-Tech-Projects-
+# Self-Study-Tech-Projects
