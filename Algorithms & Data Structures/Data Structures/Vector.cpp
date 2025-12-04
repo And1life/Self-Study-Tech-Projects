@@ -11,6 +11,7 @@ private:
 public:
     Vector();
     Vector(size_t initialCapacity);
+    Vector(const Vector& other);
     ~Vector();
 };
 
@@ -25,6 +26,17 @@ Vector<T>::Vector(size_t initialCapacity)
 {
 }
 
+template <typename T>
+Vector<T>::Vector(const Vector &other)
+    : m_data(new T[other.m_capacity]), m_capacity(other.m_capacity), m_size(other.m_size)
+{
+    for (size_t i = 0; i < m_size; ++i)
+    {
+        m_data[i] = other.m_data[i];
+    }
+    
+}
+
 template<typename T>
 Vector<T>::~Vector()
 {
@@ -33,6 +45,7 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> a(6);
+    Vector<int> a(5);
+    Vector<int> b(a);
     return 0;
 }
