@@ -12,6 +12,8 @@ public:
     Vector();
     Vector(size_t initialCapacity);
     Vector(const Vector& other);
+    Vector(Vector&& other) noexcept;
+
     ~Vector();
 };
 
@@ -37,6 +39,15 @@ Vector<T>::Vector(const Vector &other)
     
 }
 
+template <typename T>
+Vector<T>::Vector(Vector &&other) noexcept
+    : m_data(other.m_data), m_capacity(other.m_capacity), m_size(other.m_size)
+{
+    other.m_data = nullptr;
+    other.m_capacity = 0;
+    other.m_size = 0;
+}
+
 template<typename T>
 Vector<T>::~Vector()
 {
@@ -46,6 +57,6 @@ Vector<T>::~Vector()
 int main(int argc, char const *argv[])
 {
     Vector<int> a(5);
-    Vector<int> b(a);
+    Vector<int> b = std::move(a);
     return 0;
 }
