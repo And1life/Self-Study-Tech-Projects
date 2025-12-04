@@ -16,6 +16,9 @@ public:
     Vector& operator=(const Vector& other);
     Vector& operator=(Vector&& other) noexcept;
 
+    T& operator[](size_t index);
+    const T& operator[](size_t index) const;
+
     ~Vector();
 };
 
@@ -91,6 +94,18 @@ Vector<T>& Vector<T>::operator=(Vector &&other) noexcept
     
 }
 
+template <typename T>
+T& Vector<T>::operator[](size_t index)
+{
+    return m_data[index];
+}
+
+template <typename T>
+const T& Vector<T>::operator[](size_t index) const
+{
+    return m_data[index];
+}
+
 template<typename T>
 Vector<T>::~Vector()
 {
@@ -101,6 +116,6 @@ int main(int argc, char const *argv[])
 {
     Vector<int> a(5);
     Vector<int> b(4);
-    a = std::move(b);
+    a[0] = 12;
     return 0;
 }
