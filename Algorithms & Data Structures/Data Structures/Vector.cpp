@@ -10,11 +10,18 @@ private:
     size_t m_capacity;
 public:
     Vector();
+    Vector(size_t initialCapacity);
     ~Vector();
 };
 
 template<typename T>
 Vector<T>::Vector() : m_data(nullptr), m_size(0), m_capacity(0)
+{
+}
+
+template <typename T>
+Vector<T>::Vector(size_t initialCapacity)
+    : m_data(new T[initialCapacity]), m_size(0), m_capacity(initialCapacity)
 {
 }
 
@@ -26,6 +33,6 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> a;
+    Vector<int> a(6);
     return 0;
 }
