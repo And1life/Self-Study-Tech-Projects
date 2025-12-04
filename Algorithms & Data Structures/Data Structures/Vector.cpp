@@ -14,6 +14,7 @@ public:
     Vector(const Vector& other);
     Vector(Vector&& other) noexcept;
     Vector& operator=(const Vector& other);
+    Vector& operator=(Vector&& other) noexcept;
 
     ~Vector();
 };
@@ -59,6 +60,7 @@ Vector<T>& Vector<T>::operator=(const Vector &other)
         m_data = new T [other.m_capacity];
         m_capacity = other.m_capacity;
         m_size = other.m_size;
+
         for (size_t i = 0; i < m_size; ++i)
         {
             m_data[i] = other.m_data[i];
@@ -66,6 +68,27 @@ Vector<T>& Vector<T>::operator=(const Vector &other)
     }
     return *this;
 
+}
+
+template <typename T>
+Vector<T>& Vector<T>::operator=(Vector &&other) noexcept
+{
+    if (this != &other)
+    {
+        delete[] m_data;
+
+        m_data = other.m_data;
+        m_capacity = other.m_capacity;
+        m_size = other.m_size;
+
+        other.m_data = nullptr;
+        other.m_capacity = 0;
+        other.m_size = 0;
+        
+
+    }
+    return *this;
+    
 }
 
 template<typename T>
@@ -78,6 +101,6 @@ int main(int argc, char const *argv[])
 {
     Vector<int> a(5);
     Vector<int> b(4);
-    a = b;
+    a = std::move(b);
     return 0;
 }
