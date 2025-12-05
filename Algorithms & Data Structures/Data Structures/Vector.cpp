@@ -19,6 +19,8 @@ public:
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
 
+    void push_back(const T& value);
+
     ~Vector();
 };
 
@@ -106,6 +108,26 @@ const T& Vector<T>::operator[](size_t index) const
     return m_data[index];
 }
 
+template <typename T>
+void Vector<T>::push_back(const T &value)
+{
+    if (m_size >= m_capacity)
+    {
+        size_t new_capacity = (m_capacity == 0) ? 1 : m_capacity * 2;
+
+        T* new_data = new T[new_capacity];
+        for (size_t i = 0; i < m_size; ++i)
+        {
+            new_data[i] = m_data[i];
+        }
+        delete[] m_data;
+        m_data = new_data;
+        m_capacity = new_capacity;
+    }
+
+    m_data[m_size++] = value;
+}
+
 template<typename T>
 Vector<T>::~Vector()
 {
@@ -114,8 +136,18 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> a(5);
-    Vector<int> b(4);
-    a[0] = 12;
+    Vector<int> a(1);
+    a.push_back(4);
+    a.push_back(3);
+    a.push_back(18);
+    a.push_back(5);
+    a.push_back(9);
+    a.push_back(0);
+    for (size_t i = 0; i < 6; ++i)
+    {
+        std::cout << a[i] << " ";
+    }
+    
+
     return 0;
 }
