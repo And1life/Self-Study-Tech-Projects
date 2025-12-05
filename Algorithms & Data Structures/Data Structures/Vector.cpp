@@ -21,6 +21,7 @@ public:
 
     void push_back(const T& value);
     void push_back(T&& value);
+    void pop_back();
 
     ~Vector();
 };
@@ -146,6 +147,16 @@ void Vector<T>::push_back(T &&value)
     }
 
     m_data[m_size ++] = std::move(value);
+    
+}
+
+template <typename T>
+void Vector<T>::pop_back()
+{
+    if (size > 0)
+    {
+        --m_size;
+    }
     
 }
 
