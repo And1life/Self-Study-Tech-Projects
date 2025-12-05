@@ -5,10 +5,13 @@ template<typename T>
 class Vector
 {
 private:
+
     T* m_data;
     size_t m_size;
     size_t m_capacity;
+
 public:
+
     Vector();
     Vector(size_t initialCapacity);
     Vector(const Vector& other);
@@ -22,6 +25,7 @@ public:
     void push_back(const T& value);
     void push_back(T&& value);
     void pop_back();
+    void resize(size_t new_capacity);
 
     ~Vector();
 };
@@ -153,14 +157,40 @@ void Vector<T>::push_back(T &&value)
 template <typename T>
 void Vector<T>::pop_back()
 {
-    if (size > 0)
+    if (m_size > 0)
     {
         --m_size;
     }
     
 }
 
-template<typename T>
+template <typename T>
+void Vector<T>::resize(size_t new_capacity)
+{
+    if (new_capacity == m_capacity)
+    {
+        return;
+    }
+    
+    T* new_data = new T[new_capacity];
+    size_t elements_to_copy = (new_capacity < m_size) ? new_capacity : m_size;
+
+    for (size_t i = 0; i < elements_to_copy; ++i)
+    {
+        new_data[i] = std::move(m_data[i]);
+    }
+
+    delete[] m_data;
+    m_data = new_data;
+    m_capacity = new_capacity;
+
+    if (new_capacity < m_size)
+    {
+        m_size = new_capacity;
+    }    
+}
+
+template <typename T>
 Vector<T>::~Vector()
 {
     delete[] m_data;
@@ -168,14 +198,9 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<std::string> vec;
+    Vector<std::string> vec(10);
 
-    std::string str = "Hello";
-    vec.push_back(str); // Копирование
-    vec.push_back(std::string("World")); // Перемещение
-
-    std::cout << vec[0] << " " << vec[1] << std::endl; // Hello World
+    vec.resize(20);
     
-
     return 0;
 }
