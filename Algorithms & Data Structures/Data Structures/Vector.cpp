@@ -20,6 +20,7 @@ public:
     const T& operator[](size_t index) const;
 
     void push_back(const T& value);
+    void push_back(T&& value);
 
     ~Vector();
 };
@@ -128,6 +129,26 @@ void Vector<T>::push_back(const T &value)
     m_data[m_size++] = value;
 }
 
+template <typename T>
+void Vector<T>::push_back(T &&value)
+{
+    if (m_size >= m_capacity)
+    {
+        size_t new_capacity = (m_capacity == 0) ? 1 : m_capacity * 2;
+        T* new_data = new T[new_capacity];
+        for (size_t i = 0; i < m_size; ++i)
+        {
+            new_data[i] = std::move(m_data[i]);
+        }
+        delete[] m_data;
+        m_data = new_data;
+        m_capacity = new_capacity;
+    }
+
+    m_data[m_size ++] = std::move(value);
+    
+}
+
 template<typename T>
 Vector<T>::~Vector()
 {
@@ -136,17 +157,13 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> a(1);
-    a.push_back(4);
-    a.push_back(3);
-    a.push_back(18);
-    a.push_back(5);
-    a.push_back(9);
-    a.push_back(0);
-    for (size_t i = 0; i < 6; ++i)
-    {
-        std::cout << a[i] << " ";
-    }
+    Vector<std::string> vec;
+
+    std::string str = "Hello";
+    vec.push_back(str); // Копирование
+    vec.push_back(std::string("World")); // Перемещение
+
+    std::cout << vec[0] << " " << vec[1] << std::endl; // Hello World
     
 
     return 0;
