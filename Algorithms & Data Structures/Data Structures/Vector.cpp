@@ -32,6 +32,7 @@ public:
     void resize(size_t new_capacity);
     void clear();
     void insert(size_t index, const T& value);
+    void erase(size_t index);
 
     ~Vector();
 };
@@ -254,6 +255,22 @@ void Vector<T>::insert(size_t index, const T &value)
 }
 
 template <typename T>
+void Vector<T>::erase(size_t index)
+{
+    if (index >= m_size)
+    {
+        throw std::out_of_range("Index out of range");
+    }
+
+    for (size_t i = index; i < m_size - 1; ++i)
+    {
+        m_data[i] = std::move(m_data[i + 1]);
+    }
+    
+    --m_size;
+}
+
+template <typename T>
 Vector<T>::~Vector()
 {
     delete[] m_data;
@@ -279,7 +296,7 @@ int main(int argc, char const *argv[])
     }
     std::cout << std::endl;
 
-    vec.insert(3,10);
+    vec.erase(3);
 
         for (size_t i = 0; i < vec.getSize(); ++i)
     {
