@@ -31,6 +31,7 @@ public:
     void pop_back();
     void resize(size_t new_capacity);
     void clear();
+    void insert(size_t index, const T& value);
 
     ~Vector();
 };
@@ -220,6 +221,39 @@ void Vector<T>::clear()
 }
 
 template <typename T>
+void Vector<T>::insert(size_t index, const T &value)
+{
+    if(index > m_size)
+    {
+        throw std::out_of_range("Index out of range");
+    }
+
+    if (m_size >= m_capacity)
+    {
+        size_t new_capacity = (m_capacity == 0) ? 1 : m_capacity * 2;
+        T* new_data = new T[new_capacity];
+        for (size_t i = 0; i < m_size; ++i)
+        {
+            new_data[i] = std::move(m_data[i]);
+        }
+        delete[] m_data;
+        m_data = new_data;
+        m_capacity = new_capacity; 
+        
+    }
+
+    for (size_t i = m_size; i > index; --i)
+    {
+        m_data[i] = std::move(m_data[i - 1]); 
+    }
+
+    m_data[index] = value;
+
+    ++m_size;
+    
+}
+
+template <typename T>
 Vector<T>::~Vector()
 {
     delete[] m_data;
@@ -228,16 +262,29 @@ Vector<T>::~Vector()
 int main(int argc, char const *argv[])
 {
     Vector<int> vec(1);
-    std::cout << vec.empty() << std::endl;
     vec.push_back(1);
-    std::cout << vec.empty() << std::endl;
     vec.push_back(2);
-
     vec.push_back(3);
-
     vec.push_back(4);
-
     vec.push_back(5);
+    vec.push_back(6);
+    vec.push_back(7);
+    vec.push_back(8);
+    vec.push_back(9);
+    vec.push_back(10);
+
+    for (size_t i = 0; i < vec.getSize(); ++i)
+    {
+        std::cout << vec[i] << " ";
+    }
+    std::cout << std::endl;
+
+    vec.insert(3,10);
+
+        for (size_t i = 0; i < vec.getSize(); ++i)
+    {
+        std::cout << vec[i] << " ";
+    }
 
     
 
