@@ -16,6 +16,7 @@ public:
     Vector(size_t initialCapacity);
     Vector(const Vector& other);
     Vector(Vector&& other) noexcept;
+    Vector(std::initializer_list<T> init_list);
     Vector& operator=(const Vector& other);
     Vector& operator=(Vector&& other) noexcept;
 
@@ -66,6 +67,18 @@ Vector<T>::Vector(Vector &&other) noexcept
     other.m_data = nullptr;
     other.m_capacity = 0;
     other.m_size = 0;
+}
+
+template <typename T>
+Vector<T>::Vector(std::initializer_list<T> init_list)
+    : m_data(new T[init_list.size()]), m_capacity(init_list.size()), m_size(init_list.size())
+{
+    size_t i = 0;
+    for (auto &&element : init_list)
+    {
+        m_data[i++] = element; 
+    }
+    
 }
 
 template <typename T>
@@ -278,33 +291,15 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> vec(1);
-    vec.push_back(1);
-    vec.push_back(2);
-    vec.push_back(3);
-    vec.push_back(4);
-    vec.push_back(5);
-    vec.push_back(6);
-    vec.push_back(7);
-    vec.push_back(8);
-    vec.push_back(9);
-    vec.push_back(10);
+    Vector<int> vec = {1, 2, 3, 4, 5}; 
 
-    for (size_t i = 0; i < vec.getSize(); ++i)
-    {
+    std::cout << "Size: " << vec.getSize() << std::endl; 
+    std::cout << "Capacity: " << vec.getCapacity() << std::endl; 
+
+    for (size_t i = 0; i < vec.getSize(); ++i) {
         std::cout << vec[i] << " ";
     }
     std::cout << std::endl;
 
-    vec.erase(3);
-
-        for (size_t i = 0; i < vec.getSize(); ++i)
-    {
-        std::cout << vec[i] << " ";
-    }
-
-    
-
-  
     return 0;
 }
