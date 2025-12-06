@@ -22,6 +22,8 @@ public:
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
 
+    size_t getSize() const;
+
     void push_back(const T& value);
     void push_back(T&& value);
     void pop_back();
@@ -113,6 +115,12 @@ template <typename T>
 const T& Vector<T>::operator[](size_t index) const
 {
     return m_data[index];
+}
+
+template <typename T>
+size_t Vector<T>::getSize() const
+{
+    return m_size;
 }
 
 template <typename T>
@@ -211,14 +219,10 @@ int main(int argc, char const *argv[])
     vec.push_back(3);
     vec.push_back(4);
     vec.push_back(5);
-    vec.clear();
-
-    for (size_t i = 0; i < 5; ++i)
-    {
-        std::cout << vec[i] << " ";
-    }
     
-
-
+    std::cout << vec.getSize() << std::endl;
+    vec.clear();
+    std::cout << vec.getSize() << std::endl;
+  
     return 0;
 }
