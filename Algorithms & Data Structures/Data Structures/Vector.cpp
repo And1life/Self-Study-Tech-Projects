@@ -26,6 +26,7 @@ public:
     void push_back(T&& value);
     void pop_back();
     void resize(size_t new_capacity);
+    void clear();
 
     ~Vector();
 };
@@ -191,6 +192,12 @@ void Vector<T>::resize(size_t new_capacity)
 }
 
 template <typename T>
+void Vector<T>::clear()
+{
+    m_size = 0;
+}
+
+template <typename T>
 Vector<T>::~Vector()
 {
     delete[] m_data;
@@ -198,9 +205,20 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<std::string> vec(10);
+    Vector<int> vec(5);
+    vec.push_back(1);
+    vec.push_back(2);
+    vec.push_back(3);
+    vec.push_back(4);
+    vec.push_back(5);
+    vec.clear();
 
-    vec.resize(20);
+    for (size_t i = 0; i < 5; ++i)
+    {
+        std::cout << vec[i] << " ";
+    }
     
+
+
     return 0;
 }
