@@ -36,6 +36,127 @@ public:
     void erase(size_t index);
 
     ~Vector();
+
+    class Iterator
+    {
+    private:
+
+        T* ptr;
+    
+    public:
+        using difference_type = std::ptrdiff_t;
+
+        Iterator(T* p) : ptr(p) {}
+
+        T& operator*() const
+        {
+            return *ptr;
+        }
+
+        T* operator->() const
+        {
+            return ptr;
+        }
+
+        Iterator& operator++()
+        {
+            ++ptr;
+            return *this;
+        }
+
+        Iterator operator++(int)
+        {
+            Iterator temp = *this;
+            ++ptr;
+            return temp;
+        }
+
+        Iterator& operator--()
+        {
+            --ptr;
+            return *this;
+        }
+
+        Iterator operator--(int)
+        {
+            Iterator temp = *this;
+            --ptr;
+            return temp;
+        }
+
+        Iterator operator+(difference_type n) const
+        {
+            return Iterator(ptr + n);
+        }
+        
+        Iterator operator-(difference_type n) const
+        {
+            return Iterator(ptr - n);
+        }
+
+        Iterator& operator+=(difference_type n)
+        {
+            ptr += n;
+            return *this;
+        }
+
+        Iterator& operator-=(difference_type n)
+        {
+            ptr -= n;
+            return *this;
+        }
+
+        T& operator[](difference_type n) const
+        {
+            return *(ptr + n);
+        }
+
+        bool operator==(const Iterator& other) const
+        {
+            return ptr == other.ptr;
+        }
+
+        bool operator!=(const Iterator& other) const
+        {
+            return ptr != other.ptr;
+        }
+
+        bool operator<(const Iterator& other) const
+        {
+            return ptr < other.ptr;
+        }
+
+        bool operator>(const Iterator& other) const
+        {
+            return ptr > other.ptr;
+        }
+
+        bool operator<=(const Iterator& other) const
+        {
+            return ptr <= other.ptr;
+        }
+
+        bool operator>=(const Iterator& other) const
+        {
+            return ptr >= other.ptr;
+        }
+
+        difference_type operator-(const Iterator& other) const
+        {
+            return ptr - other.ptr;
+        }
+
+    };
+
+    Iterator begin()
+    {
+        return Iterator(m_data);
+    }
+
+    Iterator end()
+    {
+        return Iterator(m_data + m_size);
+    }
 };
 
 template<typename T>
@@ -291,13 +412,15 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> vec = {1, 2, 3, 4, 5}; 
+    Vector<int> vec = {1, 2, 3, 4, 5};
 
-    std::cout << "Size: " << vec.getSize() << std::endl; 
-    std::cout << "Capacity: " << vec.getCapacity() << std::endl; 
+    for (auto it = vec.begin(); it != vec.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
 
-    for (size_t i = 0; i < vec.getSize(); ++i) {
-        std::cout << vec[i] << " ";
+    for (const auto& element : vec) {
+        std::cout << element << " ";
     }
     std::cout << std::endl;
 
