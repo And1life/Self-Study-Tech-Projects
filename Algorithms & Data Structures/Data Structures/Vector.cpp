@@ -44,6 +44,7 @@ public:
         T* ptr;
     
     public:
+
         using difference_type = std::ptrdiff_t;
 
         Iterator(T* p) : ptr(p) {}
@@ -148,6 +149,118 @@ public:
 
     };
 
+    class ConstIterator
+    {
+    private:
+
+        T* ptr;
+    
+    public:
+
+        using difference_type = std::ptrdiff_t;
+
+        ConstIterator(T* p) : ptr(p) {}
+
+        const T& operator*() const
+        {
+            return *ptr;
+        }
+
+        const T* operator->() const
+        {
+            return ptr;
+        }
+
+        ConstIterator& operator++()
+        {
+            ++ptr;
+            return *this;
+        }
+
+        ConstIterator operator++(int)
+        {
+            ConstIterator temp = *this;
+            ++ptr;
+            return temp;
+        }
+
+        ConstIterator& operator--()
+        {
+            --ptr;
+            return *this;
+        }
+
+        ConstIterator operator--(int)
+        {
+            ConstIterator temp = *this;
+            --ptr;
+            return temp;
+        }
+
+        ConstIterator operator+(difference_type n) const
+        {
+            return ConstIterator(ptr + n);
+        }
+        
+        ConstIterator operator-(difference_type n) const
+        {
+            return ConstIterator(ptr - n);
+        }
+
+        ConstIterator& operator+=(difference_type n)
+        {
+            ptr += n;
+            return *this;
+        }
+
+        ConstIterator& operator-=(difference_type n)
+        {
+            ptr -= n;
+            return *this;
+        }
+
+        T& operator[](difference_type n) const
+        {
+            return *(ptr + n);
+        }
+
+        bool operator==(const ConstIterator& other) const
+        {
+            return ptr == other.ptr;
+        }
+
+        bool operator!=(const ConstIterator& other) const
+        {
+            return ptr != other.ptr;
+        }
+
+        bool operator<(const ConstIterator& other) const
+        {
+            return ptr < other.ptr;
+        }
+
+        bool operator>(const ConstIterator& other) const
+        {
+            return ptr > other.ptr;
+        }
+
+        bool operator<=(const ConstIterator& other) const
+        {
+            return ptr <= other.ptr;
+        }
+
+        bool operator>=(const ConstIterator& other) const
+        {
+            return ptr >= other.ptr;
+        }
+
+        difference_type operator-(const ConstIterator& other) const
+        {
+            return ptr - other.ptr;
+        }
+
+    };
+
     Iterator begin()
     {
         return Iterator(m_data);
@@ -156,6 +269,26 @@ public:
     Iterator end()
     {
         return Iterator(m_data + m_size);
+    }
+
+    ConstIterator begin() const
+    {
+        return ConstIterator(m_data);
+    }
+
+    ConstIterator end() const
+    {
+        return ConstIterator(m_data + m_size);
+    }
+
+    ConstIterator cbegin() const
+    {
+        return ConstIterator(m_data);
+    }
+
+    ConstIterator cend() const
+    {
+        return ConstIterator(m_data + m_size);
     }
 };
 
@@ -423,6 +556,12 @@ int main(int argc, char const *argv[])
         std::cout << element << " ";
     }
     std::cout << std::endl;
+
+    const Vector<int> constVec = {6, 7, 8, 9, 10};
+    for (auto it = constVec.cbegin(); it != constVec.cend(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl; 
 
     return 0;
 }
