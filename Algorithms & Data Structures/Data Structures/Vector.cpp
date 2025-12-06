@@ -23,6 +23,7 @@ public:
     const T& operator[](size_t index) const;
 
     size_t getSize() const;
+    size_t getCapacity() const;
 
     void push_back(const T& value);
     void push_back(T&& value);
@@ -124,6 +125,12 @@ size_t Vector<T>::getSize() const
 }
 
 template <typename T>
+size_t Vector<T>::getCapacity() const
+{
+    return m_capacity;
+}
+
+template <typename T>
 void Vector<T>::push_back(const T &value)
 {
     if (m_size >= m_capacity)
@@ -213,16 +220,19 @@ Vector<T>::~Vector()
 
 int main(int argc, char const *argv[])
 {
-    Vector<int> vec(5);
+    Vector<int> vec(1);
     vec.push_back(1);
+    std::cout << vec.getCapacity() << std::endl;
     vec.push_back(2);
+    std::cout << vec.getCapacity() << std::endl;
     vec.push_back(3);
+    std::cout << vec.getCapacity() << std::endl;
     vec.push_back(4);
+    std::cout << vec.getCapacity() << std::endl;
     vec.push_back(5);
+    std::cout << vec.getCapacity() << std::endl;
     
-    std::cout << vec.getSize() << std::endl;
-    vec.clear();
-    std::cout << vec.getSize() << std::endl;
+
   
     return 0;
 }
