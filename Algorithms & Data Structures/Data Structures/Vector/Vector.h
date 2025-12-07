@@ -380,12 +380,7 @@ Vector<T>& Vector<T>::operator=(Vector &&other) noexcept
 
 template <typename T>
 T& Vector<T>::operator[](size_t index)
-{
-    if (index >= m_size)
-    {
-        throw std::out_of_range("Index out of range");
-    }
-    
+{  
     return m_data[index];
 }
 
