@@ -27,6 +27,8 @@ public:
     size_t getCapacity() const;
     bool empty() const;
 
+    T& at(size_t index);
+    const T& at(size_t index) const;
     void push_back(const T& value);
     void push_back(T&& value);
     void pop_back();
@@ -409,6 +411,26 @@ template <typename T>
 bool Vector<T>::empty() const
 {
     return this->getSize() == 0;
+}
+
+template <typename T>
+T& Vector<T>::at(size_t index)
+{
+    if (index >= m_size)
+    {
+        throw std::out_of_range("Index out of range");
+    }
+    return m_data[index];
+}
+
+template <typename T>
+const T &Vector<T>::at(size_t index) const
+{
+    if (index >= m_size)
+    {
+        throw std::out_of_range("Index out of range");
+    }
+    return m_data[index];    
 }
 
 template <typename T>
