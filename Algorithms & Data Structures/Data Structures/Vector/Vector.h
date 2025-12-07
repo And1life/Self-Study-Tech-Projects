@@ -32,6 +32,7 @@ public:
     void push_back(const T& value);
     void push_back(T&& value);
     void pop_back();
+    void reserve(size_t new_capacity);
     void resize(size_t new_capacity);
     void clear();
     void insert(size_t index, const T& value);
@@ -477,6 +478,24 @@ void Vector<T>::pop_back()
     }
     --m_size;
     
+}
+
+template <typename T>
+void Vector<T>::reserve(size_t new_capacity)
+{
+    if (new_capacity <= m_capacity)
+    {
+        return;
+    }
+
+    T* new_data = new T[new_capacity];
+    for (size_t i = 0; i < m_size; ++i)
+    {
+        new_data[i] = std::move(m_data[i]);
+    }
+    delete[] m_data;
+    m_data = new_data;
+    m_capacity = new_capacity;  
 }
 
 template <typename T>
