@@ -1,135 +1,79 @@
-# =============================================================================
-# CMake & Build Systems
-# =============================================================================
-build/
-build-*/
-_build/
-out/
+# Ignore VS Code specific settings
+.vscode/
+
+# Ignore build files and output
 output/
-cmake-build-*/
-*.cmake
+build/
+cmake-build-debug/
+cmake-build-release/
 CMakeCache.txt
 CMakeFiles/
 Makefile
 cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-CTestTestfile.cmake.*
+*.txt
+!CMakeLists.txt
+*.svg
+*.json
 
-# =============================================================================
-# Doxygen
-# =============================================================================
-docs/
+# Игнорировать только сгенерированные файлы документации в docs/
 docs/html/
 docs/latex/
-docs/rtf/
-docs/man/
-docs/xml/
-*.doxytags
-doxygen.log
-doxygen.warnings
-docs/warnings.txt
 
-# =============================================================================
-# Compiled Object Files
-# =============================================================================
+# Ignore binary and object files
 *.o
 *.obj
 *.exe
-*.exe.*
 *.dll
 *.so
 *.dylib
-*.a
-*.lib
-a.out
+*.out
 
-# =============================================================================
-# Debug & Profile Files
-# =============================================================================
-*.dSYM/
-*.su
-*.idb
+# Ignore debug files
+*.log
+*.stackdump
+*.pch
 *.pdb
 *.ilk
+
+# Ignore auto-generated files
 *.gch
-*.pcm
-
-# Coverage
-*.gcda
-*.gcno
-*.gcov
-coverage/
-
-# =============================================================================
-# IDE & Editors
-# =============================================================================
-.vscode/
-.vscode-test/
-.idea/
+*.class
+*.pyc
+*.DS_Store
 *.swp
-*.swo
-*~
-*.sublime-project
-*.sublime-workspace
-.project
-.cproject
-.settings/
-*.code-workspace
 
-# CLion
-cmake-build-debug/
-cmake-build-release/
+# Ignore IDE files
+.idea/
+*.iml
 
-# QtCreator
-*.pro.user
-*.pro.user.*
+# Ignore compiled library files
+*.a
+*.lib
 
-# =============================================================================
-# Operating Systems
-# =============================================================================
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100https://www.perplexity.ai/spaces
-.Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
-$RECYCLE.BIN/
-
-# =============================================================================
-# Testing
-# =============================================================================
-Testing/
-test-results/
-test_output/
-
-# =============================================================================
-# Packaging
-# =============================================================================
-*.tar.gz
-*.zip
-*.7z
-*.rar
-*.msi
-
-# =============================================================================
-# Logs & Temp
-# =============================================================================
+# Ignore compiled Latex files
+*.aux
+*.bbl
+*.blg
 *.log
-logs/
-*.tmp
-*.temp
-core
-core.*
+*.synctex.gz
+*.toc
 
-# =============================================================================
-# Keep these files
-# =============================================================================
-!.gitignore
-!README.md
-!Doxyfile
-!CMakeLists.txt
-!docs/custom.css
+# Ignore test coverage files
+*.gcno
+*.gcda
+*.gcov
+
+# Ignore dependency directories
+deps/
+third_party/
+external/
+
+# Ignore executables
+*.out
+*.app
+
+# Ignore cache
+.cache/
+
+# Ignore user-specific CMake generator files
+CMakeUserPresets.json
