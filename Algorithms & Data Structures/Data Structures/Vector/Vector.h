@@ -473,7 +473,7 @@ void Vector<T>::push_back(T &&value)
 template <typename T>
 void Vector<T>::pop_back()
 {
-    if (m_size = 0)
+    if (m_size == 0)
     {
         throw std::out_of_range("Can't pop_back from an empty vector");
     }
