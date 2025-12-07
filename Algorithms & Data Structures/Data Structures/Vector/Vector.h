@@ -34,6 +34,7 @@ public:
     void pop_back();
     void reserve(size_t new_capacity);
     void resize(size_t new_size, const T& value = T());
+    void shrink_to_fit();
     void clear();
     void insert(size_t index, const T& value);
     void erase(size_t index);
@@ -520,6 +521,24 @@ void Vector<T>::resize(size_t new_size, const T& value)
     }
     
     m_size = new_size; 
+}
+
+template <typename T>
+void Vector<T>::shrink_to_fit()
+{
+    if (m_capacity == m_size)
+    {
+        return;
+    }
+
+    T* new_data = new T[m_size];
+    for (size_t i = 0; i < m_size; ++i)
+    {
+        new_data[i] = std::move(m_data[i]);
+    }
+    delete[] m_data;
+    m_data = new_data;
+    m_capacity = m_size; 
 }
 
 template <typename T>
