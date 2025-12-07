@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classVector.html#ad688a8a0dfbd07ea63d838058a436f79',1,'Vector']]],
-  ['end_1',['end',['../classVector.html#a4ff82de4613402642bea563ae35e4e7e',1,'Vector::end()'],['../classVector.html#a35ea44d5290708a4ad6e96f30d10b540',1,'Vector::end() const']]],
-  ['erase_2',['erase',['../classVector.html#a369204d03cbb5750440ec38d7caad3bb',1,'Vector']]]
+  ['difference_5ftype_0',['difference_type',['../classVector_1_1Iterator.html#af1b83d7f4de193834d4e725824d6ded6',1,'Vector::Iterator::difference_type'],['../classVector_1_1ConstIterator.html#a670aa30ee5e1014f5e5167123d8b078c',1,'Vector::ConstIterator::difference_type']]]
 ];

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../Vector.h" 
+#include "../include/Vector.hpp" 
 
 class VectorTest : public ::testing::Test {
 protected:

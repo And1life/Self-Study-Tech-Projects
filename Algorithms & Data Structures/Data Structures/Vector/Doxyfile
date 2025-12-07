@@ -1,0 +1,41 @@
+# Doxyfile 1.9.1
+PROJECT_NAME           = "Vector"
+PROJECT_BRIEF          = "C++ Vector Data Structure"
+OUTPUT_DIRECTORY       = docs/
+CREATE_SUBDIRS         = NO
+
+INPUT                  = include/ src/ tests/
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.h *.hpp *.cpp *.cc *.cxx
+RECURSIVE              = YES
+
+OUTPUT_LANGUAGE        = English
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+ABBREVIATE_BRIEF       = "The $name class"
+ALWAYS_DETAILED_SECT   = NO
+INLINE_INHERITED_MEMB  = YES
+FULL_PATH_NAMES        = NO
+STRIP_FROM_PATH        = include/
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+
+HAVE_DOT               = YES
+CLASS_DIAGRAMS         = YES
+CALL_GRAPH             = YES
+UML_LOOK               = YES
+
+TAB_SIZE               = 4
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES
+BUILTIN_STL_SUPPORT    = YES
+
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES

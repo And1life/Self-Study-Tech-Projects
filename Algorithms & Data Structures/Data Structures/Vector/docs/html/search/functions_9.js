@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['shrink_5fto_5ffit_0',['shrink_to_fit',['../classVector.html#ad6454ce193263b8000d4c18cb0c3a0c8',1,'Vector']]]
+  ['reserve_0',['reserve',['../classVector.html#afa0c4c5f0f2d2d7940180fbed0f46bc4',1,'Vector']]],
+  ['resize_1',['resize',['../classVector.html#af7c36a5e644567cde37ead98347a356d',1,'Vector']]]
 ];

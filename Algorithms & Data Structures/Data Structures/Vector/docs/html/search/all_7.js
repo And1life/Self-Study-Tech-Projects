@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['pop_5fback_0',['pop_back',['../classVector.html#adcba035109febbe55cba2a25f8483ba6',1,'Vector']]],
-  ['push_5fback_1',['push_back',['../classVector.html#a4415960a83615855ec32f8169f641786',1,'Vector::push_back(const T &amp;value)'],['../classVector.html#a7e9c3a4530e85fd3490d932846307683',1,'Vector::push_back(T &amp;&amp;value)']]]
+  ['m_5fcapacity_0',['m_capacity',['../classVector.html#ae6a33a002bcbacebd85038fdf0e8788e',1,'Vector']]],
+  ['m_5fdata_1',['m_data',['../classVector.html#a44b08c5f1a550146ab10da8e834db39b',1,'Vector']]],
+  ['m_5fsize_2',['m_size',['../classVector.html#a8331fe99244fd51edf87b3b0d9a1b05e',1,'Vector']]],
+  ['main_3',['main',['../Vector__Tests_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'Vector_Tests.cpp']]]
 ];
