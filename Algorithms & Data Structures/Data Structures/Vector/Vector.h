@@ -548,26 +548,3 @@ Vector<T>::~Vector()
 {
     delete[] m_data;
 }
-
-int main(int argc, char const *argv[])
-{
-    Vector<int> vec = {1, 2, 3, 4, 5};
-
-    for (auto it = vec.begin(); it != vec.end(); ++it) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-
-    for (const auto& element : vec) {
-        std::cout << element << " ";
-    }
-    std::cout << std::endl;
-
-    const Vector<int> constVec = {6, 7, 8, 9, 10};
-    for (auto it = constVec.cbegin(); it != constVec.cend(); ++it) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl; 
-
-    return 0;
-}
