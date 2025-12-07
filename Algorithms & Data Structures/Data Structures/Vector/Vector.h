@@ -33,7 +33,7 @@ public:
     void push_back(T&& value);
     void pop_back();
     void reserve(size_t new_capacity);
-    void resize(size_t new_capacity);
+    void resize(size_t new_size, const T& value = T());
     void clear();
     void insert(size_t index, const T& value);
     void erase(size_t index);
@@ -499,29 +499,27 @@ void Vector<T>::reserve(size_t new_capacity)
 }
 
 template <typename T>
-void Vector<T>::resize(size_t new_capacity)
+void Vector<T>::resize(size_t new_size, const T& value)
 {
-    if (new_capacity == m_capacity)
+    if (new_size == m_size)
     {
         return;
     }
-    
-    T* new_data = new T[new_capacity];
-    size_t elements_to_copy = (new_capacity < m_size) ? new_capacity : m_size;
 
-    for (size_t i = 0; i < elements_to_copy; ++i)
+    if (new_size > m_capacity)
     {
-        new_data[i] = std::move(m_data[i]);
+        reserve(new_size);
     }
 
-    delete[] m_data;
-    m_data = new_data;
-    m_capacity = new_capacity;
-
-    if (new_capacity < m_size)
+    if (new_size > m_size)
     {
-        m_size = new_capacity;
-    }    
+        for (size_t i = m_size; i < new_size; ++i)
+        {
+            m_data[i] = value;
+        }
+    }
+    
+    m_size = new_size; 
 }
 
 template <typename T>
