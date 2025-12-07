@@ -1,15 +1,11 @@
 #include <gtest/gtest.h>
-#include "../Vector.h" // Подключите ваш файл с реализацией Vector
+#include "../Vector.h" 
 
 class VectorTest : public ::testing::Test {
 protected:
-    void SetUp() override {
-        // Этот метод вызывается перед каждым тестом
-    }
+    void SetUp() override {}
 
-    void TearDown() override {
-        // Этот метод вызывается после каждого теста
-    }
+    void TearDown() override {}
 };
 
 

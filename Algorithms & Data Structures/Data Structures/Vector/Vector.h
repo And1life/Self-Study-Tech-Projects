@@ -1,44 +1,204 @@
 #include <iostream>
 
-
+/**
+ * @brief Dynamic array implementation similar to std::vector.
+ *
+ * This class provides a dynamic array that can resize itself automatically
+ * when elements are added or removed. It supports various operations such
+ * as insertion, deletion, and random access.
+ *
+ * @tparam T The type of elements stored in the vector.
+ */
 template<typename T>
 class Vector
 {
 private:
+    /**
+     * @brief Pointer to a dynamic array: stores the elements of a vector.
+     */
+    T* m_data; 
 
-    T* m_data;
+    /**
+     * @brief Current size: the number of elements in the vector.
+     */
     size_t m_size;
+
+    /**
+     * @brief Capacity: The number of elements that the allocated memory can hold without reallocation.
+     */
     size_t m_capacity;
 
 public:
-
+    /**
+     * @brief Default constructor: Initializes an empty vector.
+     */
     Vector();
+
+    /**
+     * @brief Constructor with parameter: allows you to set the initial capacity.
+     *
+     * @param initialCapacity The initial capacity of the vector.
+     */
     Vector(size_t initialCapacity);
+
+    /**
+     * @brief Copy constructor: Creates a copy of another vector.
+     *
+     * @param other The vector to copy from.
+     */
     Vector(const Vector& other);
+
+    /**
+     * @brief Move constructor: Moves resources from another vector.
+     *
+     * @param other The vector to move from. After moving, other will be in a valid but unspecified state.
+     */
     Vector(Vector&& other) noexcept;
+
+    /**
+     * @brief Constructor for initializing a vector with elements from an initialization list.
+     *
+     * @param init_list The initializer list to initialize the vector with.
+     */
     Vector(std::initializer_list<T> init_list);
+
+    /**
+     * @brief Copy assignment operator: copies data from another vector.
+     *
+     * @param other The vector to copy from.
+     * @return Reference to the current vector.
+     */
     Vector& operator=(const Vector& other);
+
+    /**
+     * @brief Move assignment operator: Moves resources from another vector.
+     *
+     * @param other The vector to move from. After moving, other will be in a valid but unspecified state.
+     * @return Reference to the current vector.
+     */
     Vector& operator=(Vector&& other) noexcept;
 
+    /**
+     * @brief Index access operator: Allows access to elements by index.
+     *
+     * @param index The index of the element to access.
+     * @return Reference to the element at the specified index.
+     */
     T& operator[](size_t index);
+
+    /**
+     * @brief Const version Index access operator.
+     *
+     * @param index The index of the element to access.
+     * @return Const reference to the element at the specified index.
+     */
     const T& operator[](size_t index) const;
 
+    /**
+     * @brief Returns the current size of the vector.
+     *
+     * @return The number of elements in the vector.
+     */
     size_t getSize() const;
+
+    /**
+     * @brief Returns the current capacity of the vector.
+     *
+     * @return The number of elements that the vector can hold without reallocation.
+     */
     size_t getCapacity() const;
+
+    /**
+     * @brief Checks if a vector is empty.
+     *
+     * @return True if the vector is empty, false otherwise.
+     */
     bool empty() const;
 
+    /**
+     * @brief Access to a vector element at a specified index with bounds checking.
+     *
+     * @param index The position of the element to access.
+     * @return Reference to the element at the specified position.
+     * @throw std::out_of_range If the index is out of range.
+     */
     T& at(size_t index);
+
+    /**
+     * @brief Const version at().
+     *
+     * @param index The position of the element to access.
+     * @return Const reference to the element at the specified position.
+     * @throw std::out_of_range If the index is out of range.
+     */
     const T& at(size_t index) const;
+
+    /**
+     * @brief Adds an element to the end of the vector.
+     *
+     * @param value The value to be added to the vector.
+     */
     void push_back(const T& value);
+
+    /**
+     * @brief Adds an element to the end of the vector using move semantics.
+     *
+     * @param value The value to be added to the vector.
+     */
     void push_back(T&& value);
+
+    /**
+     * @brief Removes the last element.
+     *
+     * @throw std::out_of_range If the vector is empty.
+     */
     void pop_back();
+
+    /**
+     * @brief Pre-allocation of memory for vector elements.
+     *
+     * @param new_capacity The new capacity of the vector.
+     */
     void reserve(size_t new_capacity);
+
+    /**
+     * @brief Changes in the number of elements in a vector.
+     *
+     * @param new_size The new size of the vector.
+     * @param value The value to initialize new elements with (default is T()).
+     */
     void resize(size_t new_size, const T& value = T());
+
+    /**
+     * @brief Decreasing the capacity of a vector to its current size.
+     */
     void shrink_to_fit();
+
+    /**
+     * @brief Clears the vector but does't free the memory.
+     */
     void clear();
+
+    /**
+     * @brief Inserts an element at the specified position.
+     *
+     * @param index The position at which the element will be inserted.
+     * @param value The value to be inserted.
+     * @throw std::out_of_range If the index is out of range.
+     */
     void insert(size_t index, const T& value);
+
+    /**
+     * @brief Removes an element from the specified position.
+     *
+     * @param index The position of the element to be removed.
+     * @throw std::out_of_range If the index is out of range.
+     */
     void erase(size_t index);
 
+    /**
+     * @brief Destructor: Frees allocated memory.
+     */
     ~Vector();
 
     class Iterator
@@ -265,31 +425,61 @@ public:
 
     };
 
+    /**
+    * @brief Returns an iterator pointing to the first element of the vector.
+    *
+    * @return Iterator pointing to the first element.
+    */
     Iterator begin()
     {
         return Iterator(m_data);
     }
 
+    /**
+    * @brief Returns an iterator pointing to the position beyond the last element of the vector.
+    *
+    * @return Iterator pointing to the position beyond the last element.
+    */
     Iterator end()
     {
         return Iterator(m_data + m_size);
     }
 
+    /**
+    * @brief Returns a const iterator pointing to the first element of the vector.
+    *
+    * @return ConstIterator pointing to the first element.
+    */
     ConstIterator begin() const
     {
         return ConstIterator(m_data);
     }
 
+    /**
+    * @brief Returns a const iterator pointing to the position beyond the last element of the vector.
+    *
+    * @return ConstIterator pointing to the position beyond the last element.
+    */
     ConstIterator end() const
     {
         return ConstIterator(m_data + m_size);
     }
 
+    /**
+    * @brief Returns a const iterator pointing to the first element of the vector.
+    *
+    * @return ConstIterator pointing to the first element.
+    */
     ConstIterator cbegin() const
     {
         return ConstIterator(m_data);
     }
-
+    
+    /**
+    * @brief Returns a const iterator pointing to the position beyond the last element of the vector.
+    *
+    * @return ConstIterator pointing to the position beyond the last element.
+    */
     ConstIterator cend() const
     {
         return ConstIterator(m_data + m_size);
@@ -299,18 +489,21 @@ public:
 template<typename T>
 Vector<T>::Vector() : m_data(nullptr), m_size(0), m_capacity(0)
 {
+    // Initialize an empty vector.
 }
 
 template <typename T>
 Vector<T>::Vector(size_t initialCapacity)
     : m_data(new T[initialCapacity]), m_size(0), m_capacity(initialCapacity)
 {
+    // Initialize a vector with the specified initial capacity.
 }
 
 template <typename T>
 Vector<T>::Vector(const Vector &other)
     : m_data(new T[other.m_capacity]), m_capacity(other.m_capacity), m_size(other.m_size)
 {
+    // Copy elements from the other vector.
     for (size_t i = 0; i < m_size; ++i)
     {
         m_data[i] = other.m_data[i];
@@ -322,6 +515,7 @@ template <typename T>
 Vector<T>::Vector(Vector &&other) noexcept
     : m_data(other.m_data), m_capacity(other.m_capacity), m_size(other.m_size)
 {
+    // Move resources from the other vector.
     other.m_data = nullptr;
     other.m_capacity = 0;
     other.m_size = 0;
@@ -331,6 +525,7 @@ template <typename T>
 Vector<T>::Vector(std::initializer_list<T> init_list)
     : m_data(new T[init_list.size()]), m_capacity(init_list.size()), m_size(init_list.size())
 {
+    // Initialize the vector with elements from the initializer list.
     size_t i = 0;
     for (auto &&element : init_list)
     {

@@ -6,6 +6,9 @@
 # Ignore Temp File
 main.cpp
 
+#Ignore documentation files
+Doxyfile
+
 # Ignore build files and output
 output/
 build/
