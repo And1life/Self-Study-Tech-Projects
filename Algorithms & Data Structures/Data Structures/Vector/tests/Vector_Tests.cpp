@@ -150,6 +150,24 @@ TEST_F(VectorTest, AccessOperatorNoThrow)
     EXPECT_NO_THROW(vec[1]);
 }
 
+TEST_F(VectorTest, At)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+
+    EXPECT_EQ(vec.at(0), 10);
+    EXPECT_EQ(vec.at(1), 20);
+}
+
+TEST_F(VectorTest, AtOutOfRange)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+
+    EXPECT_THROW(vec.at(1), std::out_of_range);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
