@@ -250,6 +250,17 @@ TEST_F(VectorTest, ShrinkToFit)
     EXPECT_EQ(vec.getCapacity(), 4);
 }
 
+TEST_F(VectorTest, Insert)
+{
+    Vector<int> vec = {1, 2, 3, 4 };
+    vec.insert(2, 7);
+    EXPECT_EQ(vec.getSize(), 5);
+    EXPECT_EQ(vec.getCapacity(), 8);
+    EXPECT_EQ(vec[1], 2);
+    EXPECT_EQ(vec[2], 7);
+    EXPECT_EQ(vec[3], 3);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
