@@ -261,6 +261,22 @@ TEST_F(VectorTest, Insert)
     EXPECT_EQ(vec[3], 3);
 }
 
+TEST_F(VectorTest, Erase)
+{
+    Vector<int> vec = {1, 2, 3, 4 };
+    vec.erase(2);
+    EXPECT_EQ(vec.getSize(), 3);
+    EXPECT_EQ(vec.getCapacity(), 4);
+    EXPECT_EQ(vec[1], 2);
+    EXPECT_EQ(vec[2], 4);
+}
+
+TEST_F(VectorTest, EraseOutOfRange)
+{
+    Vector<int> vec = {1, 2, 3, 4 };
+    EXPECT_THROW(vec.erase(4), std::out_of_range);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
