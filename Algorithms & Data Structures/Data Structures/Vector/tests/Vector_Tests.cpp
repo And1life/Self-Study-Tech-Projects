@@ -285,8 +285,26 @@ TEST_F(VectorTest, BeginEnd)
     vec.push_back(10);
     vec.push_back(20);
 
-    EXPECT_EQ(*(vec.begin()), 10);
-    EXPECT_EQ(*(vec.end() - 1), 20);
+    Vector<int>::Iterator begin = vec.begin();
+    Vector<int>::Iterator end = vec.end();
+    EXPECT_EQ(*begin, 10);
+    EXPECT_EQ(*(end - 1), 20);
+}
+
+TEST_F(VectorTest, RangeBasedForLoop)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+    vec.push_back(30);
+
+    int expected[] = {10, 20, 30 };
+    int i = 0;
+    for (auto &&element : vec)
+    {
+        EXPECT_EQ(element, vec[i++]);
+    }
+    
 }
 
 int main(int argc, char **argv) {
