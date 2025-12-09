@@ -8,7 +8,7 @@ protected:
     void TearDown() override {}
 };
 
-// Tests for Constructors and opearators =
+// Test for Constructors and opearators =
 
 TEST_F(VectorTest, DefaultConstructor)
 {
@@ -87,7 +87,7 @@ TEST_F(VectorTest, MoveAssignmentOperator)
     EXPECT_EQ(vec1.getCapacity(), 0);
 }
 
-// Tests methods
+// Test methods
 
 TEST_F(VectorTest, PushBack)
 {
@@ -275,6 +275,18 @@ TEST_F(VectorTest, EraseOutOfRange)
 {
     Vector<int> vec = {1, 2, 3, 4 };
     EXPECT_THROW(vec.erase(4), std::out_of_range);
+}
+
+// Test Iterators
+
+TEST_F(VectorTest, BeginEnd)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+
+    EXPECT_EQ(*(vec.begin()), 10);
+    EXPECT_EQ(*(vec.end() - 1), 20);
 }
 
 int main(int argc, char **argv) {
