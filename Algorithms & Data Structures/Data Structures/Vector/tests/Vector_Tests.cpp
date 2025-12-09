@@ -190,6 +190,14 @@ TEST_F(VectorTest, GetCapacity)
     EXPECT_EQ(vec.getCapacity(), 4);
 }
 
+TEST_F(VectorTest, Empty)
+{
+    Vector<int> vec;
+    EXPECT_TRUE(vec.empty());
+    vec.push_back(10);
+    EXPECT_FALSE(vec.empty());
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
