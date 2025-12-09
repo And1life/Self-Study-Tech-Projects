@@ -116,6 +116,21 @@ TEST_F(VectorTest, PushBackMove)
     EXPECT_TRUE(str2.empty());
 }
 
+TEST_F(VectorTest, PopBack)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+    vec.pop_back();
+    EXPECT_EQ(vec.getSize(), 1);
+    EXPECT_EQ(vec[0], 10);
+}
+
+TEST_F(VectorTest, PopBackEmptyVector)
+{
+    Vector<int> vec;
+    EXPECT_THROW(vec.pop_back(), std::out_of_range);
+}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
