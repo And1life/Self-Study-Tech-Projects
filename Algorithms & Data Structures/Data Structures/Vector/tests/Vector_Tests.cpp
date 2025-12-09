@@ -198,6 +198,47 @@ TEST_F(VectorTest, Empty)
     EXPECT_FALSE(vec.empty());
 }
 
+TEST_F(VectorTest, Clear)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+    vec.clear();
+    EXPECT_EQ(vec.getSize(), 0);
+    EXPECT_TRUE(vec.empty());
+}
+
+TEST_F(VectorTest, Reserve)
+{
+    Vector<int> vec;
+    vec.reserve(10);
+    EXPECT_EQ(vec.getSize(), 0);
+    EXPECT_EQ(vec.getCapacity(), 10);
+    vec.reserve(5);
+    EXPECT_EQ(vec.getCapacity(), 10);
+    vec.reserve(20);
+    EXPECT_EQ(vec.getCapacity(), 20);
+}
+
+TEST_F(VectorTest, Resize)
+{
+    Vector<int> vec;
+    vec.resize(5);
+    EXPECT_EQ(vec.getSize(), 5);
+    EXPECT_EQ(vec.getCapacity(), 5);
+    vec.resize(2);
+    EXPECT_EQ(vec.getSize(), 2);
+    EXPECT_EQ(vec.getCapacity(), 5);
+    EXPECT_EQ(vec[0], 0);
+    EXPECT_EQ(vec[1], 0);
+    Vector<int> vec2 = { 1, 2, 3, 4 };
+    vec2.resize(6, 7);
+    EXPECT_EQ(vec2.getSize(), 6);
+    EXPECT_EQ(vec2.getCapacity(), 6);
+    EXPECT_EQ(vec2[4], 7);
+    EXPECT_EQ(vec2[5], 7);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
