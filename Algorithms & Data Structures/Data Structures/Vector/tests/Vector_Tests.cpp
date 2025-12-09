@@ -8,6 +8,8 @@ protected:
     void TearDown() override {}
 };
 
+// Tests for Constructors and opearators =
+
 TEST_F(VectorTest, DefaultConstructor)
 {
     Vector<int> vec;
@@ -84,6 +86,36 @@ TEST_F(VectorTest, MoveAssignmentOperator)
     EXPECT_EQ(vec1.getSize(), 0);
     EXPECT_EQ(vec1.getCapacity(), 0);
 }
+
+// Tests methods
+
+TEST_F(VectorTest, PushBack)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+
+    EXPECT_EQ(vec.getSize(), 2);
+    EXPECT_EQ(vec[0], 10);
+    EXPECT_EQ(vec[1], 20);
+}
+
+TEST_F(VectorTest, PushBackMove)
+{
+    Vector<std::string> vec;
+    std::string str1 = "Hello";
+    std::string str2 = "World";
+
+    vec.push_back(std::move(str1));
+    vec.push_back(std::move(str2));
+
+    EXPECT_EQ(vec.getSize(), 2);
+    EXPECT_EQ(vec[0], "Hello");
+    EXPECT_EQ(vec[1], "World");
+    EXPECT_TRUE(str1.empty());
+    EXPECT_TRUE(str2.empty());
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
