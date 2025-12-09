@@ -168,6 +168,28 @@ TEST_F(VectorTest, AtOutOfRange)
     EXPECT_THROW(vec.at(1), std::out_of_range);
 }
 
+TEST_F(VectorTest, GetSize)
+{
+    Vector<int> vec;
+    EXPECT_EQ(vec.getSize(), 0);
+    vec.push_back(10);
+    EXPECT_EQ(vec.getSize(), 1);
+    vec.push_back(20);
+    EXPECT_EQ(vec.getSize(), 2);
+}
+
+TEST_F(VectorTest, GetCapacity)
+{
+    Vector<int> vec;
+    EXPECT_EQ(vec.getCapacity(), 0);
+    vec.push_back(10);
+    EXPECT_EQ(vec.getCapacity(), 1);
+    vec.push_back(20);
+    EXPECT_EQ(vec.getCapacity(), 2);
+    vec.push_back(30);
+    EXPECT_EQ(vec.getCapacity(), 4);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
