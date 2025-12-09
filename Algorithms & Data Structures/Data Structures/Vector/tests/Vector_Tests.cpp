@@ -132,6 +132,24 @@ TEST_F(VectorTest, PopBackEmptyVector)
     EXPECT_THROW(vec.pop_back(), std::out_of_range);
 }
 
+TEST_F(VectorTest, AccessOperator)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+    vec.push_back(20);
+
+    EXPECT_EQ(vec[0], 10);
+    EXPECT_EQ(vec[1], 20);
+}
+
+TEST_F(VectorTest, AccessOperatorNoThrow)
+{
+    Vector<int> vec;
+    vec.push_back(10);
+
+    EXPECT_NO_THROW(vec[1]);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
